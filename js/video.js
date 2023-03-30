@@ -92,20 +92,24 @@ document.querySelector("#mute").addEventListener("click", function() {
 
 // volume slider: change the volume based on the slider and update the volume information//
 
+let vol = document.querySelector("slider").addEventListener("change", function (){
+	vol.volume = volume.value;
+})
+var slider = document.querySelector("#slider");
+var output = document.querySelector("#volume");
+output.innerHtml = slider.value;
+
+slider.oninput = function() {
+	output.innerHTML = this.value + "%";
+  }
+
 // styled: utilize the existing oldSchool class on the video element //
 document.querySelector("#vintage").addEventListener("click", function() {
 	let element = document.querySelector("#vintage");
 	if(this.click){
-		document.querySelector("#vintage").style.display = ".oldSchool";
+		document.querySelector("#vintage").style.oldSchool;
 	}
 })
+
 // original: remove oldSchool class from the video //
 
-
-
-
-
-
-// document.querySelector("#play").addEventListener("click", function() {
-// 	console.log("Play Video");
-// });
