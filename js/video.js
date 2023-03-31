@@ -1,115 +1,97 @@
-var video;
+let video;
 
 window.addEventListener("load", function() {
+	video = document.querySelector(".video")
 	console.log("Good job opening the window")
-	console.log("Auto play is off")
-	console.log("Loop is off")
+	console.log("Auto play is set to false")
+	console.log("Loop is set to false")
+	video.autoplay = false;
+	video.loop = false;
 
 });
-
-
-// turns off autoplay //
-document.querySelector(".video").autoplay = false;
-
-
-// loop is off //
-document.querySelector(".video").loop = false;
-
 
 // plays the video and updates volume information //
 document.querySelector("#play").addEventListener("click", function() {
 	let element = document.querySelector("#play");
-	if(this.click){
 		console.log("Play Video")
-		document.querySelector(".video").play();
+		video.play();
 		document.querySelector("#volume").innerHTML = '100%';
 	}
-});
+);
 
 
 // pauses the video //
 document.querySelector("#pause").addEventListener("click", function() {
-	let element = document.querySelector("#pause");
-	if(this.click){
 		console.log("Pause Video")
-		document.querySelector(".video").pause();
+		video.pause();
 	}
-});
+);
 
 
 // slows down the video //
 document.querySelector("#slower").addEventListener("click", function () {
-	let element = document.querySelector("#slower");
-	if(this.click){
 		console.log("Slow down video")
-		rate = document.querySelector(".video").playbackRate *= 0.9;
+		rate = video.playbackRate *= 0.9;
 		console.log("Speed is " + rate)
 
 	}
-
-});
+);
 
 // speeds up the video //
 document.querySelector("#faster").addEventListener("click", function () {
-	let element = document.querySelector("#faster");
-	if(this.click){
 		console.log("Speed up video")
-		rate = document.querySelector(".video").playbackRate /= 0.9;
+		rate = video.playbackRate /= 0.9;
 		console.log("Speed is " + rate)
-
 	}
-
-});
+);
 
 
 // skip ahead: advance the current video by 10 seconds//
 document.querySelector("#skip").addEventListener("click", function() {
-	let element = document.querySelector("#skip");
-	if(this.click){
-
-		time = document.querySelector('.video').currentTime += 10;
+		time = video.currentTime += 10;
 		console.log("Video current time is " + time)
 	}
-});
+);
 
 
 // mute: mute and unmute the video and update the text in the button //
 document.querySelector("#mute").addEventListener("click", function() {
 	let element = document.querySelector("#mute");
-	if(this.click){
-		console.log("Mute video")
-		document.querySelector(".video").muted = true;
-		document.querySelector('#mute').innerHTML = 'Unmute';
+	if (video.muted == true){
+		console.log("Unmute video")
+		video.muted = false;
+		element.innerHTML = 'Mute';
 	 }
 	 else{
-		console.log("Unmute video")
-		document.querySelector(".video").muted = false;
-		document.querySelector('#mute').innerHTML = 'Mute';
+		console.log("Mute video")
+		video.muted = true;
+		element.innerHTML = 'Unmute';
 
 	 }
 });
 
 
 // volume slider: change the volume based on the slider and update the volume information//
-
-let vol = document.querySelector("slider").addEventListener("change", function (){
-	vol.volume = volume.value;
-})
-var slider = document.querySelector("#slider");
-var output = document.querySelector("#volume");
-output.innerHtml = slider.value;
-
-slider.oninput = function() {
+document.querySelector("#slider").addEventListener("change", function() {
+	var output = document.querySelector("#volume");
 	output.innerHTML = this.value + "%";
-  }
+
+	video.volume = this.value / 100;
+	console.log("The current value is " + video.volume);
+	console.log(document.querySelector("#volume"));
+	
+});
 
 // styled: utilize the existing oldSchool class on the video element //
 document.querySelector("#vintage").addEventListener("click", function() {
-	let element = document.querySelector("#vintage");
-	if(this.click){
-		document.querySelector("#vintage").style.oldSchool;
+	let element = document.querySelector(".video");
+		element.classList.add("oldSchool");
 	}
-})
+);
 
 // original: remove oldSchool class from the video //
-
+document.querySelector("#orig").addEventListener("click", function() {
+	let element = document.querySelector(".video");
+		element.classList.remove("oldSchool");
+	}
+);
